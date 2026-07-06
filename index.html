@@ -1,0 +1,865 @@
+<!-- ============================================================
+     Genaly BtoBランディングページ デモ
+     WordPress(Cocoon)固定ページの「カスタムHTML」ブロックに
+     このコードブロック全体をそのまま貼り付けてください。
+     DOCTYPE/html/head/bodyは含みません。
+     クラス名は全て "genaly-lp-" プレフィックスを付与し、
+     サイト全体の既存CSSとの衝突を避けています。
+============================================================ -->
+<div class="genaly-lp">
+<style>
+.genaly-lp {
+  --g-navy: #14213D;
+  --g-navy-2: #1F3059;
+  --g-gray-900: #1F2933;
+  --g-gray-600: #5B6472;
+  --g-gray-300: #C7CCD3;
+  --g-gray-200: #E4E7EC;
+  --g-gray-50: #F7F8FA;
+  --g-white: #FFFFFF;
+  --g-accent: #BB8A3E;
+  --g-accent-dark: #96702F;
+  --g-accent-light: #F3E6CC;
+
+  font-family: "游ゴシック体", "Yu Gothic", YuGothic, "游ゴシック Medium", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  color: var(--g-gray-900);
+  line-height: 1.8;
+  font-size: 16px;
+  background: var(--g-white);
+  -webkit-font-smoothing: antialiased;
+}
+.genaly-lp * { box-sizing: border-box; }
+.genaly-lp img { max-width: 100%; height: auto; display: block; }
+.genaly-lp a { text-decoration: none; }
+.genaly-lp ul { margin: 0; padding: 0; list-style: none; }
+.genaly-lp p { margin: 0 0 1em; }
+.genaly-lp p:last-child { margin-bottom: 0; }
+
+/* ---------- 共通レイアウト ---------- */
+.genaly-lp-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.genaly-lp-section { padding: 96px 0; }
+.genaly-lp-section--gray { background: var(--g-gray-50); }
+.genaly-lp-section--navy { background: var(--g-navy); color: var(--g-white); }
+.genaly-lp-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--g-accent-dark);
+  background: var(--g-accent-light);
+  padding: 6px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.genaly-lp-section--navy .genaly-lp-eyebrow {
+  color: var(--g-accent-light);
+  background: rgba(255,255,255,0.08);
+}
+.genaly-lp-section-title {
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--g-navy);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+.genaly-lp-section--navy .genaly-lp-section-title { color: var(--g-white); }
+.genaly-lp-section-lead {
+  font-size: 16px;
+  color: var(--g-gray-600);
+  max-width: 640px;
+  margin: 0 0 56px;
+}
+.genaly-lp-section--navy .genaly-lp-section-lead { color: var(--g-gray-300); }
+.genaly-lp-section-head { text-align: center; }
+.genaly-lp-section-head .genaly-lp-section-lead { margin-left: auto; margin-right: auto; }
+
+/* ---------- ボタン ---------- */
+.genaly-lp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 32px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+.genaly-lp-btn--primary {
+  background: var(--g-accent);
+  color: var(--g-white);
+  box-shadow: 0 8px 20px rgba(187,138,62,0.28);
+}
+.genaly-lp-btn--primary:hover { background: var(--g-accent-dark); transform: translateY(-2px); }
+.genaly-lp-btn--outline {
+  background: transparent;
+  color: var(--g-white);
+  border-color: rgba(255,255,255,0.5);
+}
+.genaly-lp-btn--outline:hover { border-color: var(--g-white); transform: translateY(-2px); }
+.genaly-lp-btn--outline-navy {
+  background: transparent;
+  color: var(--g-navy);
+  border-color: var(--g-navy);
+}
+.genaly-lp-btn--outline-navy:hover { background: var(--g-navy); color: var(--g-white); transform: translateY(-2px); }
+.genaly-lp-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.genaly-lp-section-head + .genaly-lp-cta-group,
+.genaly-lp-cta-group--center { justify-content: center; }
+
+/* ---------- 画像プレースホルダー ---------- */
+.genaly-lp-placeholder {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--g-gray-200);
+  border: 1px solid var(--g-gray-300);
+}
+.genaly-lp-placeholder img { width: 100%; }
+.genaly-lp-placeholder__label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--g-gray-600);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+.genaly-lp-placeholder__label span { font-size: 28px; }
+
+/* ---------- 1. ヒーロー ---------- */
+.genaly-lp-hero {
+  padding: 88px 0 96px;
+  background: linear-gradient(180deg, var(--g-navy) 0%, var(--g-navy-2) 100%);
+  color: var(--g-white);
+}
+.genaly-lp-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.genaly-lp-hero-brand {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--g-accent-light);
+  margin-bottom: 20px;
+}
+.genaly-lp-hero h1 {
+  margin: 0 0 24px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.genaly-lp-hero h1 .genaly-lp-hero-product {
+  display: block;
+  font-size: clamp(40px, 7vw, 64px);
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+}
+.genaly-lp-hero h1 .genaly-lp-hero-catch {
+  display: block;
+  font-size: clamp(22px, 3.4vw, 30px);
+  color: var(--g-gray-300);
+  font-weight: 500;
+}
+.genaly-lp-hero-sub {
+  font-size: 16px;
+  color: var(--g-gray-300);
+  max-width: 520px;
+  margin-bottom: 40px;
+}
+.genaly-lp-hero-mockup { aspect-ratio: 16 / 10; }
+
+/* ---------- 2. 課題提起 ---------- */
+.genaly-lp-problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.genaly-lp-problem-card {
+  background: var(--g-white);
+  border: 1px solid var(--g-gray-200);
+  border-radius: 12px;
+  padding: 32px 28px;
+}
+.genaly-lp-problem-card__icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+.genaly-lp-problem-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--g-navy);
+  margin: 0 0 10px;
+}
+.genaly-lp-problem-card p { font-size: 14.5px; color: var(--g-gray-600); }
+
+/* ---------- 3. 解決策・特徴（交互配置） ---------- */
+.genaly-lp-feature-row {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.genaly-lp-feature-row + .genaly-lp-feature-row { margin-top: 80px; }
+.genaly-lp-feature-row__media { order: 1; }
+.genaly-lp-feature-row__body { order: 2; }
+.genaly-lp-feature-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--g-accent-light);
+  color: var(--g-accent-dark);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.genaly-lp-feature-row__body h3 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--g-navy);
+  margin: 0 0 14px;
+}
+.genaly-lp-feature-row__body p { color: var(--g-gray-600); font-size: 15px; }
+
+/* ---------- 4. 導入メリット・数値訴求 ---------- */
+.genaly-lp-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.genaly-lp-stat-card {
+  text-align: center;
+  background: var(--g-white);
+  border: 1px solid var(--g-gray-200);
+  border-radius: 12px;
+  padding: 40px 24px;
+}
+.genaly-lp-stat-card__num {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--g-accent-dark);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.genaly-lp-stat-card__num small { font-size: 18px; font-weight: 700; margin-left: 2px; }
+.genaly-lp-stat-card p { color: var(--g-gray-600); font-size: 14.5px; }
+
+/* ---------- 5. 料金 ---------- */
+.genaly-lp-pricing-table-wrap { overflow-x: auto; }
+.genaly-lp-pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  background: var(--g-white);
+}
+.genaly-lp-pricing-table th,
+.genaly-lp-pricing-table td {
+  border: 1px solid var(--g-gray-200);
+  padding: 20px 24px;
+  text-align: left;
+  font-size: 14.5px;
+}
+.genaly-lp-pricing-table thead th {
+  background: var(--g-navy);
+  color: var(--g-white);
+  font-size: 16px;
+}
+.genaly-lp-pricing-table thead th .genaly-lp-plan-price {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--g-accent-light);
+  margin-top: 8px;
+}
+.genaly-lp-pricing-table tbody th {
+  background: var(--g-gray-50);
+  color: var(--g-navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.genaly-lp-pricing-table td[data-check="yes"] { color: var(--g-accent-dark); font-weight: 700; text-align: center; }
+.genaly-lp-pricing-note {
+  margin-top: 24px;
+  font-size: 13.5px;
+  color: var(--g-gray-600);
+}
+
+/* ---------- 6. 導入事例 ---------- */
+.genaly-lp-case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.genaly-lp-case-card {
+  background: var(--g-white);
+  border: 1px solid var(--g-gray-200);
+  border-radius: 12px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.genaly-lp-case-card__quote {
+  font-size: 14.5px;
+  color: var(--g-gray-900);
+  flex-grow: 1;
+}
+.genaly-lp-case-card__quote::before { content: "“"; color: var(--g-accent); font-weight: 700; }
+.genaly-lp-case-card__quote::after { content: "”"; color: var(--g-accent); font-weight: 700; }
+.genaly-lp-case-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid var(--g-gray-200);
+  padding-top: 16px;
+}
+.genaly-lp-case-card__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.genaly-lp-case-card__meta strong { display: block; font-size: 14px; color: var(--g-navy); }
+.genaly-lp-case-card__meta span { display: block; font-size: 12.5px; color: var(--g-gray-600); }
+
+/* ---------- 7. FAQ（ネイティブ details/summary、JS不要） ---------- */
+.genaly-lp-faq-list { max-width: 800px; margin: 0 auto; }
+.genaly-lp-faq-item {
+  background: var(--g-white);
+  border: 1px solid var(--g-gray-200);
+  border-radius: 10px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.genaly-lp-faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 56px 22px 24px;
+  position: relative;
+  font-weight: 700;
+  color: var(--g-navy);
+  font-size: 15.5px;
+}
+.genaly-lp-faq-item summary::-webkit-details-marker { display: none; }
+.genaly-lp-faq-item summary::before {
+  content: "Q";
+  color: var(--g-accent-dark);
+  font-weight: 900;
+  margin-right: 10px;
+}
+.genaly-lp-faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--g-accent);
+  transition: transform 0.2s ease;
+}
+.genaly-lp-faq-item[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+.genaly-lp-faq-item-body {
+  padding: 0 24px 22px 24px;
+  color: var(--g-gray-600);
+  font-size: 14.5px;
+}
+.genaly-lp-faq-item-body p { padding-left: 26px; }
+
+/* ---------- 8. 最終CTA ---------- */
+.genaly-lp-final-cta { text-align: center; }
+.genaly-lp-final-cta .genaly-lp-section-title { font-size: clamp(26px, 3.6vw, 36px); }
+
+/* ---------- レスポンシブ ---------- */
+@media (min-width: 768px) {
+  .genaly-lp-hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+  .genaly-lp-feature-row { flex-direction: row; align-items: center; gap: 56px; }
+  .genaly-lp-feature-row__media,
+  .genaly-lp-feature-row__body { flex: 1 1 50%; order: initial; }
+  .genaly-lp-feature-row--reverse { flex-direction: row-reverse; }
+}
+@media (max-width: 767px) {
+  .genaly-lp-section { padding: 64px 0; }
+  .genaly-lp-problem-grid { grid-template-columns: 1fr; }
+  .genaly-lp-stat-grid { grid-template-columns: 1fr; }
+  .genaly-lp-case-grid { grid-template-columns: 1fr; }
+  .genaly-lp-cta-group { flex-direction: column; }
+  .genaly-lp-cta-group .genaly-lp-btn { width: 100%; }
+  .genaly-lp-hero { text-align: left; }
+}
+</style>
+
+<!-- ============================================================
+     1. ヒーローセクション
+============================================================ -->
+<section id="genaly-lp-hero" class="genaly-lp-hero">
+  <div class="genaly-lp-inner">
+    <div class="genaly-lp-hero-grid">
+      <div>
+        <span class="genaly-lp-hero-brand">GENALY BUSINESS INTELLIGENCE PLATFORM</span>
+        <h1>
+          <span class="genaly-lp-hero-product">Genaly</span>
+          <span class="genaly-lp-hero-catch">データを、意思決定の力に。</span>
+        </h1>
+        <!-- [PLACEHOLDER: プロダクトの一言説明（1〜2文）に差し替える] -->
+        <p class="genaly-lp-hero-sub">
+          散在するデータを一つに集約し、経営判断に必要な指標をリアルタイムで可視化するBtoB向けデータ活用プラットフォームです。
+        </p>
+        <div class="genaly-lp-cta-group">
+          <!-- [PLACEHOLDER: 資料請求フォームの実際のURLに差し替える] -->
+          <a href="#genaly-lp-final-cta" class="genaly-lp-btn genaly-lp-btn--primary">資料請求はこちら</a>
+          <!-- [PLACEHOLDER: 無料相談申込フォームの実際のURLに差し替える] -->
+          <a href="#genaly-lp-final-cta" class="genaly-lp-btn genaly-lp-btn--outline">無料相談を申し込む</a>
+        </div>
+      </div>
+      <div>
+        <!-- [PLACEHOLDER: 実際のダッシュボード画面のスクリーンショット／モックアップ画像に差し替える] -->
+        <div class="genaly-lp-placeholder genaly-lp-hero-mockup">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500'%3E%3Crect width='800' height='500' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="Genalyダッシュボード画面のイメージ（プレースホルダー）" width="800" height="500" loading="eager">
+          <span class="genaly-lp-placeholder__label" aria-hidden="true">
+            <span>🖥️</span>ダッシュボード画像プレースホルダー
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     2. 課題提起セクション
+============================================================ -->
+<section id="genaly-lp-problems" class="genaly-lp-section">
+  <div class="genaly-lp-inner">
+    <div class="genaly-lp-section-head">
+      <span class="genaly-lp-eyebrow">CHALLENGES</span>
+      <h2 class="genaly-lp-section-title">こんな課題はありませんか？</h2>
+      <p class="genaly-lp-section-lead">
+        <!-- [PLACEHOLDER: 課題提起セクションのリード文に差し替える] -->
+        多くの企業のデータ活用・意思決定の現場で、次のような声をよくお聞きします。
+      </p>
+    </div>
+    <div class="genaly-lp-problem-grid">
+      <div class="genaly-lp-problem-card">
+        <span class="genaly-lp-problem-card__icon" aria-hidden="true">📊</span>
+        <!-- [PLACEHOLDER: 課題1の見出し・説明文に差し替える] -->
+        <h3>データが部署ごとに散在している</h3>
+        <p>各部門が個別にデータを管理しており、全社横断での状況把握に時間がかかる。</p>
+      </div>
+      <div class="genaly-lp-problem-card">
+        <span class="genaly-lp-problem-card__icon" aria-hidden="true">⏱️</span>
+        <!-- [PLACEHOLDER: 課題2の見出し・説明文に差し替える] -->
+        <h3>レポート作成に工数がかかりすぎる</h3>
+        <p>毎月の集計・資料作成に多くの時間を取られ、本来の分析業務に手が回らない。</p>
+      </div>
+      <div class="genaly-lp-problem-card">
+        <span class="genaly-lp-problem-card__icon" aria-hidden="true">📉</span>
+        <!-- [PLACEHOLDER: 課題3の見出し・説明文に差し替える] -->
+        <h3>勘や経験に頼った意思決定になりがち</h3>
+        <p>数値的な根拠が乏しく、担当者の経験や感覚に依存した判断が続いている。</p>
+      </div>
+      <div class="genaly-lp-problem-card">
+        <span class="genaly-lp-problem-card__icon" aria-hidden="true">🔍</span>
+        <!-- [PLACEHOLDER: 課題4の見出し・説明文に差し替える] -->
+        <h3>現場の状況をリアルタイムに把握できない</h3>
+        <p>数字が確認できるのは翌月以降で、問題が起きてから気づくことが多い。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     3. 解決策・特徴セクション（交互配置）
+============================================================ -->
+<section id="genaly-lp-features" class="genaly-lp-section genaly-lp-section--gray">
+  <div class="genaly-lp-inner">
+    <div class="genaly-lp-section-head">
+      <span class="genaly-lp-eyebrow">FEATURES</span>
+      <h2 class="genaly-lp-section-title">Genalyでできること</h2>
+      <p class="genaly-lp-section-lead">
+        <!-- [PLACEHOLDER: 機能紹介セクションのリード文に差し替える] -->
+        データの収集から可視化、分析までを一つのプラットフォームで完結します。
+      </p>
+    </div>
+
+    <div class="genaly-lp-feature-row">
+      <div class="genaly-lp-feature-row__media">
+        <!-- [PLACEHOLDER: 機能1の画面キャプチャ・イメージ画像に差し替える] -->
+        <div class="genaly-lp-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="リアルタイムダッシュボード機能画面のイメージ（プレースホルダー）" width="600" height="400">
+          <span class="genaly-lp-placeholder__label" aria-hidden="true"><span>📈</span>画像プレースホルダー</span>
+        </div>
+      </div>
+      <div class="genaly-lp-feature-row__body">
+        <span class="genaly-lp-feature-num">01</span>
+        <!-- [PLACEHOLDER: 機能1の見出し・説明文に差し替える] -->
+        <h3>リアルタイムダッシュボード</h3>
+        <p>複数のデータソースを自動で集約し、経営指標をリアルタイムに可視化します。必要な数値をワンクリックで確認でき、会議のたびに資料を作り直す必要がなくなります。</p>
+      </div>
+    </div>
+
+    <div class="genaly-lp-feature-row genaly-lp-feature-row--reverse">
+      <div class="genaly-lp-feature-row__media">
+        <!-- [PLACEHOLDER: 機能2の画面キャプチャ・イメージ画像に差し替える] -->
+        <div class="genaly-lp-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="自動レポート生成機能画面のイメージ（プレースホルダー）" width="600" height="400">
+          <span class="genaly-lp-placeholder__label" aria-hidden="true"><span>📝</span>画像プレースホルダー</span>
+        </div>
+      </div>
+      <div class="genaly-lp-feature-row__body">
+        <span class="genaly-lp-feature-num">02</span>
+        <!-- [PLACEHOLDER: 機能2の見出し・説明文に差し替える] -->
+        <h3>レポートの自動生成</h3>
+        <p>週次・月次のレポートをテンプレートに沿って自動作成。手作業での集計・体裁調整にかかっていた時間を大幅に削減します。</p>
+      </div>
+    </div>
+
+    <div class="genaly-lp-feature-row">
+      <div class="genaly-lp-feature-row__media">
+        <!-- [PLACEHOLDER: 機能3の画面キャプチャ・イメージ画像に差し替える] -->
+        <div class="genaly-lp-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="部門横断データ統合機能画面のイメージ（プレースホルダー）" width="600" height="400">
+          <span class="genaly-lp-placeholder__label" aria-hidden="true"><span>🔗</span>画像プレースホルダー</span>
+        </div>
+      </div>
+      <div class="genaly-lp-feature-row__body">
+        <span class="genaly-lp-feature-num">03</span>
+        <!-- [PLACEHOLDER: 機能3の見出し・説明文に差し替える] -->
+        <h3>部門横断データ統合</h3>
+        <p>営業・製造・会計など部門ごとに分散したデータを一元化。全社共通の基準で数値を比較・分析できるようになります。</p>
+      </div>
+    </div>
+
+    <div class="genaly-lp-feature-row genaly-lp-feature-row--reverse">
+      <div class="genaly-lp-feature-row__media">
+        <!-- [PLACEHOLDER: 機能4の画面キャプチャ・イメージ画像に差し替える] -->
+        <div class="genaly-lp-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="AIによる異常検知・予測分析機能画面のイメージ（プレースホルダー）" width="600" height="400">
+          <span class="genaly-lp-placeholder__label" aria-hidden="true"><span>🤖</span>画像プレースホルダー</span>
+        </div>
+      </div>
+      <div class="genaly-lp-feature-row__body">
+        <span class="genaly-lp-feature-num">04</span>
+        <!-- [PLACEHOLDER: 機能4の見出し・説明文に差し替える] -->
+        <h3>AIによる異常検知・予測分析</h3>
+        <p>過去のデータをもとに異常値や傾向の変化を自動検知。人が気づきにくい変化も、早期にアラートとして通知します。</p>
+      </div>
+    </div>
+
+    <div class="genaly-lp-feature-row">
+      <div class="genaly-lp-feature-row__media">
+        <!-- [PLACEHOLDER: 機能5の画面キャプチャ・イメージ画像に差し替える] -->
+        <div class="genaly-lp-placeholder">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='600' height='400' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="カスタムアラート通知機能画面のイメージ（プレースホルダー）" width="600" height="400">
+          <span class="genaly-lp-placeholder__label" aria-hidden="true"><span>🔔</span>画像プレースホルダー</span>
+        </div>
+      </div>
+      <div class="genaly-lp-feature-row__body">
+        <span class="genaly-lp-feature-num">05</span>
+        <!-- [PLACEHOLDER: 機能5の見出し・説明文に差し替える] -->
+        <h3>カスタムアラート通知</h3>
+        <p>指標がしきい値を超えた際に、メールやチャットツールへ自動で通知。異常の見逃しを防ぎ、対応のスピードを高めます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     4. 導入メリット・数値訴求セクション
+============================================================ -->
+<section id="genaly-lp-benefits" class="genaly-lp-section genaly-lp-section--navy">
+  <div class="genaly-lp-inner">
+    <div class="genaly-lp-section-head">
+      <span class="genaly-lp-eyebrow">RESULTS</span>
+      <h2 class="genaly-lp-section-title">導入企業様はこう変わりました</h2>
+      <p class="genaly-lp-section-lead">
+        <!-- [PLACEHOLDER: 数値訴求セクションのリード文に差し替える] -->
+        Genaly導入により、多くの企業様でデータ活用にかかる時間とコストが削減されています。
+      </p>
+    </div>
+    <div class="genaly-lp-stat-grid">
+      <div class="genaly-lp-stat-card">
+        <!-- [PLACEHOLDER: 実際の数値に差し替える] -->
+        <div class="genaly-lp-stat-card__num">70<small>%削減</small></div>
+        <p>レポート作成にかかる作業時間</p>
+      </div>
+      <div class="genaly-lp-stat-card">
+        <!-- [PLACEHOLDER: 実際の数値に差し替える] -->
+        <div class="genaly-lp-stat-card__num">300<small>社以上</small></div>
+        <p>導入企業数（2025年時点）</p>
+      </div>
+      <div class="genaly-lp-stat-card">
+        <!-- [PLACEHOLDER: 実際の数値に差し替える] -->
+        <div class="genaly-lp-stat-card__num">90<small>%削減</small></div>
+        <p>データ集計にかかる時間</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     5. 料金セクション
+============================================================ -->
+<section id="genaly-lp-pricing" class="genaly-lp-section">
+  <div class="genaly-lp-inner">
+    <div class="genaly-lp-section-head">
+      <span class="genaly-lp-eyebrow">PRICING</span>
+      <h2 class="genaly-lp-section-title">料金プラン</h2>
+      <p class="genaly-lp-section-lead">
+        <!-- [PLACEHOLDER: 料金セクションのリード文に差し替える] -->
+        企業規模・利用用途に応じて3つのプランをご用意しています。
+      </p>
+    </div>
+    <div class="genaly-lp-pricing-table-wrap">
+      <table class="genaly-lp-pricing-table">
+        <thead>
+          <tr>
+            <th scope="col">項目</th>
+            <!-- [PLACEHOLDER: 実際のプラン名・金額に差し替える] -->
+            <th scope="col">Lite<span class="genaly-lp-plan-price">¥要問合せ / 月</span></th>
+            <th scope="col">Standard<span class="genaly-lp-plan-price">¥要問合せ / 月</span></th>
+            <th scope="col">Enterprise<span class="genaly-lp-plan-price">¥要問合せ / 月</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- [PLACEHOLDER: 実際の対象規模・機能差分に差し替える] -->
+          <tr>
+            <th scope="row">対象規模</th>
+            <td>〜50名</td>
+            <td>〜300名</td>
+            <td>301名以上</td>
+          </tr>
+          <tr>
+            <th scope="row">ダッシュボード</th>
+            <td data-check="yes">○</td>
+            <td data-check="yes">○</td>
+            <td data-check="yes">○</td>
+          </tr>
+          <tr>
+            <th scope="row">自動レポート生成</th>
+            <td>—</td>
+            <td data-check="yes">○</td>
+            <td data-check="yes">○</td>
+          </tr>
+          <tr>
+            <th scope="row">AI異常検知・予測分析</th>
+            <td>—</td>
+            <td>—</td>
+            <td data-check="yes">○</td>
+          </tr>
+          <tr>
+            <th scope="row">サポート体制</th>
+            <td>メール</td>
+            <td>メール・チャット</td>
+            <td>専任担当者</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="genaly-lp-pricing-note">※ 上記は仮のプラン内容です。詳細な料金・機能についてはお問い合わせください。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     6. 導入事例・お客様の声セクション
+============================================================ -->
+<section id="genaly-lp-case-studies" class="genaly-lp-section genaly-lp-section--gray">
+  <div class="genaly-lp-inner">
+    <div class="genaly-lp-section-head">
+      <span class="genaly-lp-eyebrow">CASE STUDIES</span>
+      <h2 class="genaly-lp-section-title">導入企業様の声</h2>
+    </div>
+    <div class="genaly-lp-case-grid">
+      <!-- [PLACEHOLDER: 実際の導入事例・企業名・コメントに差し替える] -->
+      <div class="genaly-lp-case-card">
+        <p class="genaly-lp-case-card__quote">部門ごとに散らばっていたデータが一元化され、月次会議の準備時間が大幅に短縮されました。</p>
+        <div class="genaly-lp-case-card__meta">
+          <img class="genaly-lp-case-card__logo"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Crect width='44' height='44' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="株式会社サンプルAのロゴ（プレースホルダー）" width="44" height="44">
+          <div><strong>株式会社サンプルA</strong><span>製造業・情報システム部</span></div>
+        </div>
+      </div>
+      <!-- [PLACEHOLDER: 実際の導入事例・企業名・コメントに差し替える] -->
+      <div class="genaly-lp-case-card">
+        <p class="genaly-lp-case-card__quote">現場の数字がリアルタイムに見えるようになり、問題の早期発見につながっています。</p>
+        <div class="genaly-lp-case-card__meta">
+          <img class="genaly-lp-case-card__logo"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Crect width='44' height='44' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="株式会社サンプルBのロゴ（プレースホルダー）" width="44" height="44">
+          <div><strong>株式会社サンプルB</strong><span>小売業・経営企画室</span></div>
+        </div>
+      </div>
+      <!-- [PLACEHOLDER: 実際の導入事例・企業名・コメントに差し替える] -->
+      <div class="genaly-lp-case-card">
+        <p class="genaly-lp-case-card__quote">導入前は勘に頼っていた判断が、数値の裏付けを持って行えるようになりました。</p>
+        <div class="genaly-lp-case-card__meta">
+          <img class="genaly-lp-case-card__logo"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44'%3E%3Crect width='44' height='44' fill='%23E4E7EC'/%3E%3C/svg%3E"
+               alt="株式会社サンプルCのロゴ（プレースホルダー）" width="44" height="44">
+          <div><strong>株式会社サンプルC</strong><span>物流業・代表取締役</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     7. FAQセクション（アコーディオンはネイティブ details/summary で実装、JS不要）
+============================================================ -->
+<section id="genaly-lp-faq" class="genaly-lp-section">
+  <div class="genaly-lp-inner">
+    <div class="genaly-lp-section-head">
+      <span class="genaly-lp-eyebrow">FAQ</span>
+      <h2 class="genaly-lp-section-title">よくある質問</h2>
+    </div>
+    <div class="genaly-lp-faq-list">
+
+      <details class="genaly-lp-faq-item" name="genaly-lp-faq-group" open>
+        <summary>導入までにどのくらいの期間がかかりますか？</summary>
+        <div class="genaly-lp-faq-item-body">
+          <!-- [PLACEHOLDER: 実際の導入期間の目安に差し替える] -->
+          <p>お申込みから運用開始まで、標準的な構成の場合で約〇週間が目安です。データ連携の内容により前後します。</p>
+        </div>
+      </details>
+
+      <details class="genaly-lp-faq-item" name="genaly-lp-faq-group">
+        <summary>セキュリティ対策はどうなっていますか？</summary>
+        <div class="genaly-lp-faq-item-body">
+          <!-- [PLACEHOLDER: 実際のセキュリティ対策・認証取得状況に差し替える] -->
+          <p>通信の暗号化やアクセス権限管理など、法人利用を想定したセキュリティ対策を実施しています。詳細は個別にご説明いたします。</p>
+        </div>
+      </details>
+
+      <details class="genaly-lp-faq-item" name="genaly-lp-faq-group">
+        <summary>既存の社内システムと連携できますか？</summary>
+        <div class="genaly-lp-faq-item-body">
+          <!-- [PLACEHOLDER: 実際の連携可能システム・API情報に差し替える] -->
+          <p>主要な会計・販売管理システムとの連携に対応しています。個別のシステム連携についてはお問い合わせください。</p>
+        </div>
+      </details>
+
+      <details class="genaly-lp-faq-item" name="genaly-lp-faq-group">
+        <summary>無料トライアルはありますか？</summary>
+        <div class="genaly-lp-faq-item-body">
+          <!-- [PLACEHOLDER: 実際のトライアル有無・期間・条件に差し替える] -->
+          <p>無料トライアルをご用意しています。期間・利用条件については無料相談にてご案内いたします。</p>
+        </div>
+      </details>
+
+      <details class="genaly-lp-faq-item" name="genaly-lp-faq-group">
+        <summary>導入後のサポート体制について教えてください</summary>
+        <div class="genaly-lp-faq-item-body">
+          <!-- [PLACEHOLDER: 実際のサポート窓口・対応時間に差し替える] -->
+          <p>専任担当によるオンボーディング支援に加え、メール・チャットでの問い合わせ窓口をご用意しています。</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     8. 最終CTAセクション
+============================================================ -->
+<section id="genaly-lp-final-cta" class="genaly-lp-section genaly-lp-section--navy genaly-lp-final-cta">
+  <div class="genaly-lp-inner">
+    <span class="genaly-lp-eyebrow">CONTACT</span>
+    <h2 class="genaly-lp-section-title">まずは無料相談から</h2>
+    <p class="genaly-lp-section-lead" style="margin-left:auto;margin-right:auto;">
+      <!-- [PLACEHOLDER: 最終CTAセクションのリード文に差し替える] -->
+      貴社のデータ活用における課題を、Genalyがどのように解決できるか。まずはお気軽にご相談ください。
+    </p>
+    <div class="genaly-lp-cta-group genaly-lp-cta-group--center">
+      <!-- [PLACEHOLDER: 資料請求フォームの実際のURLに差し替える] -->
+      <a href="#genaly-lp-hero" class="genaly-lp-btn genaly-lp-btn--primary">資料請求はこちら</a>
+      <!-- [PLACEHOLDER: 無料相談申込フォームの実際のURLに差し替える] -->
+      <a href="#genaly-lp-hero" class="genaly-lp-btn genaly-lp-btn--outline">無料相談を申し込む</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     JSON-LD 構造化データ（FAQPage）
+     ※ 上記FAQの文言を変更した場合は、必ずこちらも同じ内容に更新してください
+============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "導入までにどのくらいの期間がかかりますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "お申込みから運用開始まで、標準的な構成の場合で約〇週間が目安です。データ連携の内容により前後します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "セキュリティ対策はどうなっていますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "通信の暗号化やアクセス権限管理など、法人利用を想定したセキュリティ対策を実施しています。詳細は個別にご説明いたします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "既存の社内システムと連携できますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "主要な会計・販売管理システムとの連携に対応しています。個別のシステム連携についてはお問い合わせください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "無料トライアルはありますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "無料トライアルをご用意しています。期間・利用条件については無料相談にてご案内いたします。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "導入後のサポート体制について教えてください",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "専任担当によるオンボーディング支援に加え、メール・チャットでの問い合わせ窓口をご用意しています。"
+      }
+    }
+  ]
+}
+</script>
+</div>
+<!-- ============================================================
+     Genaly LP デモ ここまで
+============================================================ -->
